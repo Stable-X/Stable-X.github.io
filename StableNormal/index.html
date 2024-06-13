@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="StableNormal: Reducing Diffusion Variance for Stable and Sharp Normal">
+  <meta name="keywords" content="normal estimation, diffusion model">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="StableNormal">
+  <meta name="twitter:description" content="Reducing Diffusion Variance for Stable and Sharp Normal">
+
+  <title>StableNormal: Reducing Diffusion Variance for Stable and Sharp Normal</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1FWSVCGZTG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-1FWSVCGZTG');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/bulma.min.css">
+  <link rel="stylesheet" href="./css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./css/twentytwenty.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="icon" href="./images/favicon.png">
+
+  <script src="./js/jquery-3.2.1.min.js"></script>
+  <script src="./js/jquery.event.move.js"></script>
+  <script src="./js/jquery.twentytwenty.js"></script>
+  <script src="./js/bulma-carousel.min.js"></script>
+  <script src="./js/bulma-slider.min.js"></script>
+  <script src="./js/fontawesome.all.min.js"></script>
+
+  <!--MathJax-->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">StableNormal: Reducing Diffusion Variance for Stable and Sharp Normal</h1>
+          <h3 class="title has-text-centered"></h3>
+          
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="" target="_blank" rel="noopener noreferrer"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf" style="color: orangered"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/Stable-X/StableNormal" target="_blank" rel="noopener noreferrer"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=sylXTxG_U2U" target="_blank" rel="noopener noreferrer"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Demo Video</span>
+                </a>
+            </span>
+  
+              <!-- Hugging Face. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/spaces/Stable-X/stable-normal" target="_blank" rel="noopener noreferrer"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      &#129303;
+                  </span>
+                  <span>Hugging Face Space</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body" style="margin-bottom: 0px;">
+      <img src="./images/StableNormal-Teaser.jpg" width="100%">
+    </div>
+    <div class="content has-text-justified" style="margin-top: -30px; margin-bottom: 20px;">
+      <p>
+        This work addresses the challenge of high-quality surface normal estimation from monocular colored inputs ( i.e., images and videos), a field which is recently revolutionized by repurposing diffusion priors. However, these attempts still struggle with high-variance inference, which conflicts with the deterministic nature of Image2Normal task. Our method, StableNormal,
+        aims to reduce the inference variance, thus producing “stable” and “sharp”
+        normal estimates, even under challenging imaging conditions, such as extreme lighting, motion/defocus blur, and low-quality/compressed images. It
+        is also robust against transparent and reflective surfaces, as well as cluttered
+        scenes with numerous objects. Specifically, StableNormal employs a coarseto-fine strategy, which starts with a one-step normal estimator (YOSO) to
+        establish a reliable initial normal, that is relatively coarse, then followed by
+        a semantic-guided refinement process (SG-DRN) that refines the normals to
+        recover geometric details. The effectiveness of StableNormal is demonstrated
+        through competitive performance on standard datasets like DIODE-indoor,
+        iBims, ScannetV2, and NYUv2, and its capability in enhancing various downstream tasks, such as surface reconstruction and normal enhancement, is also showcased. These results evidence that StableNormal retains both the
+        “stability” and “sharpness” necessary for accurate normal estimation. Our
+        StableNormal is a good step to repurpose diffusion priors for deterministic
+        estimation. To democratize this, code and models will be publicly available.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <!-- Method. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths" style="margin-top: 30px; margin-bottom: 20px;">
+        <h2 class="title is-3">Pipeline</h2>
+        <div class="content has-text-justified">
+
+
+          <div class="hero-body" style="margin-top: 0px; margin-bottom: -30px;">
+            <img id="method_train" width="100%" src="./images/pipeline-v3.png" alt="Marigold training scheme"/>
+          </div>
+          
+          <p>
+            The overall pipeline is composed of two stages: 1) YOSO aims to produce a confident initialization 𝑥<sub>t</sub> with a novel Noise-Decoupled MSE Loss; 2) SG-DRN plays the role of stable denoising, by leveraging the stronger semantic control information extracted from DINO [Oquab et al. 2024]. The textual prompt for the U-Net in both stages is set to “The normal map”.
+          </p>
+
+
+        </div>
+      </div>
+    </div>
+    <!--/ Method. -->
+  </div>
+</section>
+
+<section class="hero teaser is-light is-small">
+  
+  <div class="hero-body">
+    <div class="container">
+      <div class="section-title has-text-centered" style="margin-top: 10px; margin-bottom: 20px;">
+        <h2 class="title is-3">Comparison Gallery</h2>
+      </div>
+      <script
+        type="module"
+        src="https://gradio.s3-us-west-2.amazonaws.com/4.36.1/gradio.js"
+      ></script>
+    
+      <gradio-app src="https://stable-x-normal-estimation-comparison.hf.space"></gradio-app>
+      
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+  $(window).on('load', function() {
+    bulmaCarousel.attach('#results-carousel-horizontal', {
+      slidesToScroll: 1,
+      slidesToShow: 3,
+      loop: true,
+      autoplay: true,
+    });
+
+    bulmaCarousel.attach('#results-carousel-vertical', {
+      slidesToScroll: 1,
+      slidesToShow: 5,
+      loop: true,
+      autoplay: true,
+    });
+
+    $(".twentytwenty-container-top").twentytwenty({
+      before_label: 'Input',
+      after_label: 'Ours',
+      default_offset_pct: 0.75,
+    });
+    $(".twentytwenty-container-bottom").twentytwenty({
+      before_label: 'Marigold',
+      after_label: 'Ours',
+      default_offset_pct: 0.5,
+    });
+  });
+</script>
+
+
+<section class="section pt-0" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Citation</h2>
+    <pre class="selectable"><code></code></pre>
+  </div>
+</section>
+
+
+<footer class="footer pt-4 pb-0">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Website template based on
+            <a href="https://github.com/nerfies/nerfies.github.io">
+              Nerfies
+            </a>
+            and licensed under
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+              CC-BY-SA-4.0
+            </a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

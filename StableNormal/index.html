@@ -11,18 +11,72 @@
   <meta name="twitter:title" content="StableNormal">
   <meta name="twitter:description" content="StableNormal: Reducing Diffusion Variance for Stable and Sharp Normal">
   <style>
+    .publication-title {
+      font-family: 'Google Sans', sans-serif;
+    }
+    .publication-authors {
+      font-family: 'Noto Sans', sans-serif;
+    }
+    .publication-banner {
+      max-height: 300px;
+      width: 100%;
+      object-fit: cover;
+    }
+    .publication-header .hero-body {
+      padding-bottom: 0;
+    }
+    .publication-title {
+      font-family: 'Google Sans', sans-serif;
+    }
+    .publication-authors {
+      font-family: 'Google Sans', sans-serif;
+    }
+    .publication-venue {
+      color: #555;
+      width: fit-content;
+      font-weight: bold;
+      text-align: center;
+      margin: 0 auto;
+      margin-bottom: 1rem;
+    }
+    .publication-awards {
+      color: #ff3860;
+      width: fit-content;
+      margin: 0 auto;
+      margin-bottom: 1rem;
+    }
+    .publication-authors {
+      margin-bottom: 1rem;
+    }
     .author-block {
       display: inline-block;
       margin-right: 10px;
     }
     .author-affiliations {
       font-size: 0.9em;
+      margin: 16px 0;
       color: #666;
-      margin-top: 20px;
       text-align: center;
     }
-    .author-row {
-      margin-bottom: 5px;
+    .author-affiliations sup {
+      margin-right: 2px;
+    }
+    .column-content {
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .teaser .hero-body {
+      padding-top: 0;
+      padding-bottom: 3rem;
+    }
+    .teaser {
+      font-family: 'Google Sans', sans-serif;
+    }
+    .footer .content p {
+      text-align: center;
+    }
+    .icon-link {
+      font-size: 1.2rem;
     }
   </style>
   <title>StableNormal: Reducing Diffusion Variance for Stable and Sharp Normal</title>
@@ -84,37 +138,26 @@
           <div class="column has-text-centered">
             <h1 class="title is-1 publication-title">StableNormal: Reducing Diffusion Variance for Stable and Sharp Normal</h1>
             
-            <!-- Author information -->
             <div class="is-size-5 publication-authors">
               <div class="author-row">
-                <span class="author-block">
-                  <a href="https://github.com/hugoycj">CHONGJIE YE</a><sup>*,1,2</sup></span>
-                <span class="author-block">
-                  <a href="https://lingtengqiu.github.io/">LINGTENG QIU</a><sup>*,1,2</sup></span>
+                <span class="author-block"><a href="https://github.com/hugoycj">Chongjie Ye</a><sup>*,1,2</sup>,</span>
+                <span class="author-block"><a href="https://lingtengqiu.github.io/">Lingteng Qiu</a><sup>*,1,2</sup>,</span>
               </div>
               <div class="author-row">
-                <span class="author-block">
-                  <a href="https://github.com/gxd1994">XIAODONG GU</a><sup>3</sup>,</span>
-                <span class="author-block">
-                  <a href="https://github.com/hitsz-zuoqi">QI ZUO</a><sup>3</sup>,</span>
-                <span class="author-block">
-                  <a href="https://scholar.google.com/citations?hl=zh-TW&user=x5gpN0sAAAAJ">YUSHUANG WU</a><sup>1,2</sup>,</span>
+                <span class="author-block"><a href="https://github.com/gxd1994">Xiaodong Gu</a><sup>3</sup>,</span>
+                <span class="author-block"><a href="https://github.com/hitsz-zuoqi">Qi Zuo</a><sup>3</sup>,</span>
+                <span class="author-block"><a href="https://scholar.google.com/citations?hl=zh-TW&user=x5gpN0sAAAAJ">Yushuang Wu</a><sup>1,2</sup>,</span>
               </div>
               <div class="author-row">
-                <span class="author-block">
-                  <a href="https://scholar.google.com/citations?user=GHOQKCwAAAAJ">ZILONG DONG</a><sup>3</sup>,</span>
-                <span class="author-block">
-                  <a href="https://research.cs.washington.edu/istc/lfb/">LIEFENG BO</a><sup>3</sup></span>
+                <span class="author-block"><a href="https://scholar.google.com/citations?user=GHOQKCwAAAAJ">Zilong Dong</a><sup>3</sup>,</span>
+                <span class="author-block"><a href="https://research.cs.washington.edu/istc/lfb/">Liefeng Bo</a><sup>3</sup>,</span>
               </div>
               <div class="author-row">
-                <span class="author-block">
-                  <a href="https://xiuyuliang.cn/">YULIANG XIU</a><sup>†,4</sup></span>
-                <span class="author-block">
-                  <a href="https://gaplab.cuhk.edu.cn/">XIAOGUANG HAN</a><sup>†,2,1</sup></span>
+                <span class="author-block"><a href="https://xiuyuliang.cn/">Yuliang Xiu</a><sup>†,4</sup>,</span>
+                <span class="author-block"><a href="https://gaplab.cuhk.edu.cn/">Xiaoguang Han</a><sup>†,2,1</sup></span>
               </div>
             </div>
 
-            <!-- Affiliations -->
             <div class="author-affiliations">
               <sup>1</sup>FNii, The Chinese University of Hongkong, Shenzhen, China<br>
               <sup>2</sup>SSE, The Chinese University of Hongkong, Shenzhen, China<br>
@@ -124,58 +167,43 @@
               <sup>†</sup>Corresponding Author
             </div>
 
-            <h3 align="center" class="is-size-5"><span class="venue-name">SIGGRAPH Asia 2024 (Journal Track)</span></h3>
-  
+            <div class="is-size-5 publication-venue">SIGGRAPH Asia 2024 (Journal Track)</div>
+
             <div class="column has-text-centered">
               <div class="publication-links">
-                <!-- Paper link -->
                 <span class="link-block">
                   <a href="https://arxiv.org/abs/2406.16864" target="_blank" rel="noopener noreferrer"
                      class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                        <i class="fas fa-file-pdf" style="color: orangered"></i>
-                    </span>
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
                     <span>Paper</span>
                   </a>
                 </span>
-                <!-- ArXiv link -->
                 <span class="link-block">
                   <a href="https://arxiv.org/abs/2406.16864" target="_blank" rel="noopener noreferrer"
                      class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                        <i class="ai ai-arxiv"></i>
-                    </span>
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
                     <span>arXiv</span>
                   </a>
                 </span>
-                <!-- Code link -->
                 <span class="link-block">
                   <a href="https://github.com/Stable-X/StableNormal" target="_blank" rel="noopener noreferrer"
                      class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                        <i class="fab fa-github"></i>
-                    </span>
+                    <span class="icon"><i class="fab fa-github"></i></span>
                     <span>Code</span>
                   </a>
                 </span>
-                <!-- Demo Video link -->
                 <span class="link-block">
                   <a href="https://www.youtube.com/watch?v=sylXTxG_U2U" target="_blank" rel="noopener noreferrer"
                      class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                        <i class="fab fa-youtube"></i>
-                    </span>
-                    <span>Demo Video</span>
+                    <span class="icon"><i class="fab fa-youtube"></i></span>
+                    <span>Video</span>
                   </a>
                 </span>
-                <!-- Hugging Face link -->
                 <span class="link-block">
                   <a href="https://huggingface.co/spaces/Stable-X/StableNormal" target="_blank" rel="noopener noreferrer"
                      class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                        &#129303;
-                    </span>
-                    <span>Hugging Face Space</span>
+                    <span class="icon">🤗</span>
+                    <span>Demo</span>
                   </a>
                 </span>
               </div>

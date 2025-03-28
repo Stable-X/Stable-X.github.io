@@ -3,7 +3,7 @@ modelViewerGallary.isTextured = false;
 
 // Initialize the selection panel images
 $('#gallerySelectionPanel .selectable-image').each((i, img) => {
-    img.src = `https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/gallery/${img.getAttribute('name')}.png`;
+    img.src = `https://hi3dgen-release.tos-cn-beijing.volces.com/gallery/${img.getAttribute('name')}.png`;
 })
 
 // Add event listener to the selection panel
@@ -21,8 +21,8 @@ gallerySelectionPanel.addEventListener('click', async function(event) {
 
     const name = img.getAttribute('name');
 
-    modelViewerGallary.src = `https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/gallery/${name}.glb`;
-    modelViewerGallary.texturePath = `https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/gallery/${name}_normal.png`;
+    modelViewerGallary.src = `https://hi3dgen-release.tos-cn-beijing.volces.com/gallery/${name}.glb`;
+    modelViewerGallary.texturePath = `https://hi3dgen-release.tos-cn-beijing.volces.com/gallery/${name}_normal.png`;
     modelViewerGallary.resetView();
     modelViewerGallary.showPoster();
 });
@@ -47,8 +47,8 @@ gallerySelectionPanel.addEventListener('click', async function(event) {
 $(document).ready(() => {
     const name = document.querySelector('#gallerySelectionPanel .selectable-image.selected').getAttribute('name');
 
-    modelViewerGallary.src = `https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/gallery/${name}.glb`;
-    modelViewerGallary.texturePath = `https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/gallery/${name}_normal.png`;
+    modelViewerGallary.src = `https://hi3dgen-release.tos-cn-beijing.volces.com/gallery/${name}.glb`;
+    modelViewerGallary.texturePath = `https://hi3dgen-release.tos-cn-beijing.volces.com/gallery/${name}_normal.png`;
     
     modelViewerGallary.resetView();
 

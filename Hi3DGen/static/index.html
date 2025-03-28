@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hi3DGen</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+  <script type="module" src="./js/model-viewer.min.js"></script>
+
+  <link href="./css/sans.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/bulma.min.css">
+  <link rel="stylesheet" href="./css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/selection-panel.css">
+  <link rel="icon" href="./images/favicon.svg">
+
+  <script src="./js/jquery.min.js"></script>
+  <script defer src="./js/fontawesome.all.min.js"></script>
+  <script src="./js/bulma-carousel.min.js"></script>
+  <script src="./js/bulma-slider.min.js"></script>
+  <script src="./js/index.js"></script>
+</head>
+
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Hi👋3DGen: High-fidelity 3D Geometry Generation from Images via Normal Bridging</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><a href="https://github.com/hugoycj">Chongjie Ye</a><sup>1,2*</sup>,</span>
+              <span class="author-block"><a href="https://yushuang-wu.github.io">Yushuang Wu</a><sup>2*</sup>,</span>
+              <span class="author-block"><a href="" onclick="return false;">Ziteng Lu</a><sup>1</sup>,</span>
+              <span class="author-block"><a href="https://scholar.google.com/citations?hl=en&user=HA5zLp4AAAAJ">Jiahao Chang</a><sup>1</sup>,</span>
+              <span class="author-block"><a href="" onclick="return false;">Xiaoyang Guo</a><sup>2</sup>,</span>
+              <span class="author-block"><a href="https://scholar.google.com/citations?hl=en&user=qn61WqgAAAAJ">Jiaqing Zhou</a><sup>2</sup>,</span>
+              <span class="author-block"><a href="https://sites.google.com/view/fromandto">Hao Zhao</a><sup>3</sup></span>
+              <span class="author-block"><a href="https://gaplab.cuhk.edu.cn">Xiaoguang Han</a><sup>1#</sup></span>
+            </div>
+            
+            
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>The Chinese University of Hong Kong, Shenzhen,&nbsp;&nbsp;</span>
+              <span class="author-block"><sup>2</sup>ByteDance,&nbsp;&nbsp;</span>
+              <span class="author-block"><sup>3</sup>Tsinghua University</span>
+            </div>
+            
+
+            <!-- <div class="is-size-5 publication-authors" style="margin-top: 1em;">
+              CVPR 2025
+            </div> -->
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://github.com/Stable-X/Hi3DGen" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://huggingface.co/spaces/Stable-X/Hi3DGen" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon">
+                      🤗
+                    </span>
+                    <span>Live Demo</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <video id="teaser" autoplay controls muted loop playsinline height="100%">
+          <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/images/demo.mp4" type="video/mp4">
+        </video>
+        <h2 class="subtitle has-text-centered">
+          Hi👋3DGen: High-fidelity 3D Geometry Generation from Images via Normal Bridging.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              With the growing demand for high-fidelity 3D models from 2D images, existing methods still face significant challenges in accurately reproducing fine-grained geometric details due to limitations in domain gaps and inherent ambiguities in RGB images. To address these issues, we propose Hi3DGen, a novel framework for generating high-fidelity 3D geometry from images via normal bridging.
+              Hi3DGen consists of three key components: (1) an image-to-normal estimator that decouples the low-high frequency image pattern with noise injection and dual-stream training to achieve generalizable, stable, and sharp estimation; (2) a normal-to-geometry learning approach that uses normal-regularized latent diffusion learning to enhance 3D geometry generation fidelity; and (3) a 3D data synthesis pipeline that constructs a high-quality dataset to support training.
+              Extensive experiments demonstrate the effectiveness and superiority of our framework in generating rich geometric details, outperforming state-of-the-art methods in terms of fidelity. Our work provides a new direction for high-fidelity 3D geometry generation from images by leveraging normal maps as an intermediate representation.
+            </p>
+            <!-- <img src="/images/method_overview_hr.png" alt="teaser image" style="width: 100%;"> -->
+          </div>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-full">
+          <img src="./images/method_overview_hr.png" alt="teaser image" style="width: 100%;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <!-- Method Section -->
+      <div class="columns is-centered">
+        <div class="column is-full">
+          <h2 class="title is-3 has-text-left">Method</h2>
+          <div class="content has-text-justified">
+            <!-- Two Columns Layout -->
+            <div class="columns">
+              <!-- Left Column: Two Images -->
+              <div class="column" style="margin-right: 20px;">
+                <p>
+                  <b>The First Stage: Image-to-Normal Estimation.</b> Left part: Illustration of Noise-injected Regressive Normal Estimation (<b>NiRNE</b>); Right part: Noisy label at high-frequency regions in real-domain data.
+                </p>
+                <img src="./images/method_i2n.png" alt="Left Top Image" style="width: 100%; margin-bottom: 30px;">
+                <p>
+                  Normal estimation results. Qualitative comparisons.
+                </p>
+                <img src="./images/result_i2n.png" alt="Left Bottom Image" style="width: 100%;">
+              </div>
+              <!-- Right Column: Two Images -->
+              <div class="column">
+                <p>
+                  <b>The Second stage: Normal-to-Geometry Generation.</b> An illustration of Normal-Regularized Latent Diffusion (<b>NoRLD</b>).
+                </p>
+                <img src="./images/method_n2g.png" alt="Right Top Image" style="width: 100%; margin-bottom: 30px;">
+                <p>
+                  The construction procedure of the proposed <b>DetailVerse</b> dataset, which contains high-quality synthesized 3D assets to support the training of Hi3DGen. The pipeline contains three steps: text prompt coleection, image generation, and 3D assests synthesis. 
+                </p>
+                <img src="./images/detailverse.png" alt="Right Bottom Image" style="width: 100%;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <img id="enlarged-image">
+
+  <section class="hero">
+    <div class="container is-max-desktop is-centered">
+      <h2 class="title is-3" style="margin-top: 10px;">Results</h3>
+      <div class="content has-text-justified">
+        <p>
+          Click on the images below to see our generated results as geometry-only meshes in a 3D viewer. 
+        </p>
+      </div>
+      <!-- <div id="toggleTexturedGallery" class="toggle-container">
+        <button class="toggle-button toggle-left">Geometry only</button>
+        <button class="toggle-button toggle-right active">Textured</button>
+      </div> -->
+      <div class="model-wrapper">
+        <div class="tips-wrapper">
+          <div class="tips-icon">💡Tips</div>
+          <div class="tips-text">
+            <p>● Scroll to zoom in/out</p>
+            <p>● Drag to rotate</p>
+            <p>● Press "shift" and drag to pan</p>
+            <!-- <p>● Click on the buttons at the top to switch texture color on/off</p> -->
+          </div>
+        </div>
+        <model-viewer id="modelViewerGallary" class="model-viewer-texture" loading="eager"
+          poster="./images/loading.gif" touch-action="pan-y" environment-image="legacy" zoom-sensitivity="0.2"
+          camera-controls disable-tap min-camera-orbit="auto auto 1m" max-camera-orbit="auto auto 10m"
+          shadow-intensity="1" ar style="width: 100%; height: 100%;">
+        </model-viewer>
+      </div>
+      <div id="gallerySelectionPanel" class="selection-panel" style="width: 100%; aspect-ratio: 3.3/1;">
+        <img class="selectable-image selected" name="result_1">  
+        <img class="selectable-image" name="result_2">
+        <img class="selectable-image" name="result_3">
+        <img class="selectable-image" name="result_4">
+      </div>
+    </div>
+  </section>
+  <!--/ Interactive Mesh. -->
+
+  
+
+  <!-- Model Comparison. -->
+  <section class="hero">
+    <div class="hero-body" style="padding: 0;">
+      <div class="container is-max-desktop" id="comparison_container">
+        <h2 class="title is-3" style="margin-top: 10px; align-self: flex-start;">Comparison to Other Open-Sourced Methods</h3>
+        <div class="content has-text-justified" style="align-self: flex-start;">
+          <p>
+            Select a method from the dropdown menu to compare the results of Hi3DGen with it side by side. 
+          </p>
+        </div>
+  
+        <!-- <div id="toggleTexturedComparison" class="toggle-container">
+          <button class="toggle-button toggle-left">Geometry only</button>
+          <button class="toggle-button toggle-right active">Textured</button>
+        </div> -->
+  
+        <div class="model-container" id="model-compare-wrapper">
+          <!-- Model 1 Viewer with Label -->
+          <div class="model-wrapper-comparison">
+            <div class="model-label">MoGe</div>
+            <model-viewer id="modelViewerComparison1" class="model-viewer-texture" loading="eager"
+              poster="./images/loading.gif" touch-action="pan-y" environment-image="legacy" zoom-sensitivity="0.2"
+              camera-controls disable-tap min-camera-orbit="auto auto 1m" max-camera-orbit="auto auto 10m" interaction-prompt="none"
+              shadow-intensity="1" ar style="width: 100%; height: 100%;">
+            </model-viewer>
+          </div>
+          <!-- Model 2 Viewer with Label -->
+          <div class="model-wrapper-comparison">
+            <div class="tips-wrapper">
+              <div class="tips-icon">💡Tips</div>
+              <div class="tips-text">
+                <p>● Scroll to zoom in/out</p>
+                <p>● Drag to rotate</p>
+                <p>● Press "shift" and drag to pan</p>
+                <!-- <p>● Click on the buttons at the top to switch texture color on/off</p> -->
+              </div>
+            </div>
+            <div id="comparisonFootnote">
+              *No camera intrinsics prediction; using ours instead.
+            </div>
+            <select id="comparisonBaselineSelection" class="dropdown model-label">
+              <option value="hunyuan">Hunyuan</option>
+              <option value="trellis">Trellis</option>
+            </select>
+            <model-viewer id="modelViewerComparison2" class="model-viewer-texture" loading="eager"
+              poster="./images/loading.gif" touch-action="pan-y" environment-image="legacy" zoom-sensitivity="0.2"
+              camera-controls disable-tap min-camera-orbit="auto auto 1m" max-camera-orbit="auto auto 10m" interaction-prompt="none"
+              shadow-intensity="1" ar style="width: 100%; height: 100%;">
+            </model-viewer>
+          </div>
+        </div>
+        <div class="hero-body" style="padding: 0;">
+          <div class="selection-panel" id="comparisonSelectionPanel" style="width: 90% !important; aspect-ratio: 3.8/1; margin-left: 5%;">
+            <img class="selectable-image selected" name="rodin_images_3caff08e-86ba-4535-82b0-e4708fa9dbc0">
+            <img class="selectable-image" name="hunyuan_images_619-input">
+            <img class="selectable-image" name="hunyuan_images_7001-input">
+            <img class="selectable-image" name="meshy_images2_cover-55">
+            <img class="selectable-image" name="meshy_images2_cover-58">
+            <img class="selectable-image" name="meshy_images3_cover-18">
+            <img class="selectable-image" name="meshy_images3_cover-37">
+            <img class="selectable-image" name="meshy_images3_cover-50">
+            <img class="selectable-image" name="meshy_images3_cover-54">
+            <img class="selectable-image" name="meshy_images3_cover-59">
+            <img class="selectable-image" name="meshy_images_cover-62">
+            <img class="selectable-image" name="meshy_images_cover-94">
+            <img class="selectable-image" name="rodin_images_2ef55f9c-e1f0-4001-b679-8f56b9f3b040">
+            <img class="selectable-image" name="rodin_images_370c550f-de9b-4853-947c-0cbdc989dd0e">
+            <img class="selectable-image" name="rodin_images_3d150470-37ac-46f0-9550-a0a87751a69d">
+            <img class="selectable-image" name="rodin_images_411aa3a7-3ba5-49b0-8b1e-9c689204020b">
+            <img class="selectable-image" name="rodin_images_420f7a3a-60c1-4656-b347-61f7b1636dae">
+            <img class="selectable-image" name="rodin_images_4400166c-4bcf-438d-bbf8-dc7c4e44163b">
+            <img class="selectable-image" name="rodin_images_44ed3696-b42d-4acf-b3e9-4a5e236bcbde">
+            <img class="selectable-image" name="rodin_images_b6d55ccc-8020-45af-b323-f94330ad3c94">
+            <img class="selectable-image" name="rodin_images_Snipaste_2025-02-20_22-52-31">
+            <img class="selectable-image" name="rodin_images_Snipaste_2025-02-21_12-18-28">
+            <img class="selectable-image" name="rodin_images_Snipaste_2025-02-21_13-40-06">
+            <img class="selectable-image" name="rodin_images_Snipaste_2025-02-21_13-40-46">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!--/Model Comparison. -->
+
+  <section class="hero is-light">
+    <div class="hero-body" style="padding: 0;">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3" style="margin-top: 30px;">Generation Gallery</h2>
+        <div class="video-gallery">
+          <!-- 视频项 -->
+          
+          
+          <!-- row1 -->
+          <div class="video-row">
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_5869-input.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_5869-input_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_5869-input_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_6433-input.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_6433-input_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_6433-input_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_6477-input.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_6477-input_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_6477-input_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_6609-input.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_6609-input_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_6609-input_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_6651-input.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_6651-input_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_6651-input_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_7241-input.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_7241-input_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_7241-input_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_7368-input.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_7368-input_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_7368-input_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_7759-input.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_7759-input_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_7759-input_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- row1 -->
+
+          <!-- row2 -->
+          <div class="video-row">
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_9877-input.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_9877-input_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_9877-input_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_9987-input.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_9987-input_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_9987-input_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_10684-input.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_10684-input_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_10684-input_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_10711-input.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_10711-input_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_10711-input_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_11011-input.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_11011-input_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_11011-input_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_11156-input.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_11156-input_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/hunyuan_images_11156-input_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-8.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-8_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-8_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-36.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-36_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-36_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- row2 -->
+
+          <!-- row3 -->
+          <div class="video-row">
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-41.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-41_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-41_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-44.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-44_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-44_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-56.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-56_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-56_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-58.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-58_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-58_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-68.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-68_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-68_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-81.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-81_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-81_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-82.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-82_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images_cover-82_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images2_cover-3.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images2_cover-3_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images2_cover-3_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- row3 -->
+
+          <!-- row4 -->
+          <div class="video-row">
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images2_cover-49.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images2_cover-49_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images2_cover-49_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images3_cover-58.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images3_cover-58_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images3_cover-58_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images3_cover-75.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images3_cover-75_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/meshy_images3_cover-75_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_2e615dea-8d1b-4835-8ca7-4be897464d89.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_2e615dea-8d1b-4835-8ca7-4be897464d89_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_2e615dea-8d1b-4835-8ca7-4be897464d89_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_3cd81277-9508-4a37-a45d-c58d1b2928c8.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_3cd81277-9508-4a37-a45d-c58d1b2928c8_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_3cd81277-9508-4a37-a45d-c58d1b2928c8_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_3d55f6f8-6c5e-4688-ba8b-380d508eef32.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_3d55f6f8-6c5e-4688-ba8b-380d508eef32_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_3d55f6f8-6c5e-4688-ba8b-380d508eef32_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_4ef4297c-b897-420c-a758-14a2faa3f7f1.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_4ef4297c-b897-420c-a758-14a2faa3f7f1_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_4ef4297c-b897-420c-a758-14a2faa3f7f1_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_35a6ff37-13e7-47b0-b8e1-46e490a5a612.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_35a6ff37-13e7-47b0-b8e1-46e490a5a612_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_35a6ff37-13e7-47b0-b8e1-46e490a5a612_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- row4 -->
+
+          <!-- row5 -->
+          <div class="video-row">
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_48c8f622-4c46-41b0-be62-c6b82f305958.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_48c8f622-4c46-41b0-be62-c6b82f305958_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_48c8f622-4c46-41b0-be62-c6b82f305958_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_51d81dc4-e74d-4e06-9c8b-e084af94d591.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_51d81dc4-e74d-4e06-9c8b-e084af94d591_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_51d81dc4-e74d-4e06-9c8b-e084af94d591_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_54afeb90-204e-4eec-8a5f-737fe6d11893.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_54afeb90-204e-4eec-8a5f-737fe6d11893_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_54afeb90-204e-4eec-8a5f-737fe6d11893_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_98b3f5d1-82eb-47f2-9b72-6c3bcff36c9a.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_98b3f5d1-82eb-47f2-9b72-6c3bcff36c9a_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_98b3f5d1-82eb-47f2-9b72-6c3bcff36c9a_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_98810bb9-c1e2-4e0e-9ad1-928bc69f510b.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_98810bb9-c1e2-4e0e-9ad1-928bc69f510b_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_98810bb9-c1e2-4e0e-9ad1-928bc69f510b_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_a61be46c-e647-4f63-9a2f-d7ef4e6b08d9.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_a61be46c-e647-4f63-9a2f-d7ef4e6b08d9_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_a61be46c-e647-4f63-9a2f-d7ef4e6b08d9_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_a0637cf4-da2b-4daa-8616-c2a56902432f.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_a0637cf4-da2b-4daa-8616-c2a56902432f_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_a0637cf4-da2b-4daa-8616-c2a56902432f_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-container">
+                <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_a708d3b2-8734-4ebc-b91f-63dfdeb43194.png" class="video-reference" alt="Reference Image">
+                <div class="video-preview-container">
+                  <img src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_a708d3b2-8734-4ebc-b91f-63dfdeb43194_preview.png" class="video-preview" alt="Preview Image">
+                  <video class="video-content" muted loop playsinline height="100%">
+                    <source src="https://hi3dgen-release.tos-cn-beijing.volces.com/project_pages/static/videos/more_results/rodin_images_a708d3b2-8734-4ebc-b91f-63dfdeb43194_preview.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- row5 -->
+          
+          <!-- 添加更多video-row来容纳40个视频 -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+        <pre><code>@misc{ye2025hi3dgen,
+  title={Hi3DGen: High-fidelity 3D Geometry Generation from Images via Normal Bridging},
+  author={Ye, Chongjie and Wu, Yushuang and Lu, Ziteng and Chang, Jiahao and Guo, Xiaoyang and Zhou, Jiaqing and Zhao, Hao and Han, Xiaoguang},
+  year={2025},
+  eprint={},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV},
+  url={https://arxiv.org/abs/}, 
+}</code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content" style="text-align: center;">
+            <p>
+              The page template is borrowed from  <a href="https://wangrc.site/MoGePage/">MoGe</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="./js/model-viewer.js"></script>
+  <script src="./js/gallery.js"></script>
+  <script src="./js/selection-panel.js"></script>
+
+  <script src="./js/comparison.js"></script>
+
+  <script src="./js/video_gallery.js"></script>
+  <script src="./js/video_comparison.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+  
+
+</body>
+
+</html>

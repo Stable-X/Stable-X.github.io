@@ -3,9 +3,9 @@ document.querySelectorAll('model-viewer.model-viewer-texture').forEach(
     function(modelViewer) {
         // Switches between textured and untextured mode
         modelViewer.setTextured = function(isTextured) { 
-            modelViewer.model.materials[0].pbrMetallicRoughness.setMetallicFactor(0.5);
-            modelViewer.model.materials[0].pbrMetallicRoughness.setRoughnessFactor(0.5);
-            modelViewer.model.materials[0].pbrMetallicRoughness.setBaseColorFactor([0.6, 0.6, 0.6]);
+            modelViewer.model.materials[0].pbrMetallicRoughness.setMetallicFactor(0.1);
+            modelViewer.model.materials[0].pbrMetallicRoughness.setRoughnessFactor(0.9);
+            modelViewer.model.materials[0].pbrMetallicRoughness.setBaseColorFactor([0.4, 0.4, 0.4]);
             modelViewer.model.materials[0].pbrMetallicRoughness.baseColorTexture.setTexture(null);
         };
 

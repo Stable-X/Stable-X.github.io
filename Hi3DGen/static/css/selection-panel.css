@@ -38,7 +38,7 @@
   cursor: pointer;
 }
 
-#enlarged-image {
+/* #enlarged-image {
   max-height: 600px;
   max-width: 600px;
   max-width: 80%;
@@ -53,7 +53,31 @@
   border-radius: 10px;
   transition: opacity 0.3s;
   opacity: 0%;
+} */
+
+#enlarged-images-container {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  opacity: 0;
 }
+
+#enlarged-image, #enlarged-image-normal {
+  max-width: 50%; /* 每张图片占据容器的一半宽度 */
+  max-height: 600px; /* 限制最大高度 */
+  box-sizing: content-box;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  border-radius: 10px;
+  margin: 0 5px; /* 添加一些间距 */
+}
+/* image & normal show at the same time */
+
 
 .selectable-image:hover {
   transform: scale(1.05);

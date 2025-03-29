@@ -1,29 +1,7 @@
-const modelViewerComparison1 = document.querySelector("model-viewer#modelViewerComparison1");
-const modelViewerComparison2 = document.querySelector("model-viewer#modelViewerComparison2");
-
 // Initialize the selection panel images
 $('#comparisonSelectionPanel .selectable-image').each((i, img) => {
-    img.src = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/${img.getAttribute('name')}_color.png`;
-})
-
-// // Set the toggle buttons
-// toggleComparisonLeftButton = document.querySelector('#toggleTexturedComparison .toggle-left');
-// toggleComparisonRightButton = document.querySelector('#toggleTexturedComparison .toggle-right');
-
-// toggleComparisonLeftButton.addEventListener('click', function() {
-//     toggleComparisonLeftButton.classList.add('active');
-//     toggleComparisonRightButton.classList.remove('active');
-//     modelViewerComparison1.setTextured(false);
-//     modelViewerComparison2.setTextured(false);
-// });
-
-// toggleComparisonRightButton.addEventListener('click', function() {
-//     toggleComparisonLeftButton.classList.remove('active');
-//     toggleComparisonRightButton.classList.add('active');
-//     modelViewerComparison1.setTextured(false);
-//     modelViewerComparison2.setTextured(false);
-// });
-
+    img.src = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/ ${img.getAttribute('name')}_color.png`;
+});
 
 // Click an image to select the case
 const comparisonSelectionPanel = document.getElementById('comparisonSelectionPanel');
@@ -42,36 +20,46 @@ comparisonSelectionPanel.addEventListener('click', function(event) {
     const name = img.getAttribute('name');
     const baseline = document.getElementById('comparisonBaselineSelection').value;
 
-    const meshPath1 = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/ours_wo_texture_resize/${name}.glb`, meshPath2 = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/${baseline}_wo_texture_resize/${name}.glb`;
-    const texturePath = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/${name}_color.png`;
-    
+    const meshPath1 = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/ours_wo_texture_resize/ ${name}.glb`;
+    const meshPath2 = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/ ${baseline}_wo_texture_resize/${name}.glb`;
+    const texturePath = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/ ${name}_color.png`;
+
     modelViewerComparison1.src = meshPath1;
     modelViewerComparison1.texturePath = texturePath;
     modelViewerComparison1.resetView();
     modelViewerComparison1.showPoster();
-    
+
     modelViewerComparison2.src = meshPath2;
     modelViewerComparison2.texturePath = texturePath;
     modelViewerComparison2.resetView();
-    modelViewerComparison2.showPoster(); 
+    modelViewerComparison2.showPoster();
 });
 
 // Dropdown to select the baseline method
 document.getElementById('comparisonBaselineSelection').addEventListener('change', function (event) {
     const name = document.querySelector('#comparisonSelectionPanel .selectable-image.selected').getAttribute('name');
     const baseline = document.getElementById('comparisonBaselineSelection').value;
-    
+
     if (['rodin', 'hunyuan'].includes(baseline))
         document.querySelector('#comparisonFootnote').style.opacity = `100%`;
     else
         document.querySelector('#comparisonFootnote').style.opacity = `0%`;
 
-    const meshPath2 = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/${baseline}_wo_texture_resize/${name}.glb`;
-    const texturePath = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/${name}_color.png`;
+    const meshPath2 = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/ ${baseline}_wo_texture_resize/${name}.glb`;
+    const texturePath = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/ ${name}_color.png`;
 
     modelViewerComparison2.src = meshPath2;
     modelViewerComparison2.texturePath = texturePath;
-    modelViewerComparison2.showPoster();
+
+    // Ensure the model is loaded before resetting the view and showing the poster
+    modelViewerComparison2.addEventListener('load', () => {
+        modelViewerComparison2.resetView();
+        modelViewerComparison2.showPoster();
+    });
+
+    modelViewerComparison2.addEventListener('error', (error) => {
+        console.error("Failed to load model:", error);
+    });
 });
 
 // Sync the view of two model viewers
@@ -91,34 +79,34 @@ const syncView = (event) => {
     target.cameraTarget = `${sourceTarget.x}m ${sourceTarget.y}m ${sourceTarget.z}m`;
     target.fieldOfView = `${sourceFoV}deg`;
     target.jumpCameraToGoal();
-}
+};
 
-modelViewerComparison1.addEventListener('camera-change', syncView)
+modelViewerComparison1.addEventListener('camera-change', syncView);
 modelViewerComparison1.addEventListener('mousedown', () => {syncViewWith = modelViewerComparison1;});
 modelViewerComparison1.addEventListener('wheel', () => {syncViewWith = modelViewerComparison1;});
 
-modelViewerComparison2.addEventListener('camera-change', syncView)
+modelViewerComparison2.addEventListener('camera-change', syncView);
 modelViewerComparison2.addEventListener('mousedown', () => {syncViewWith = modelViewerComparison2;});
 modelViewerComparison2.addEventListener('wheel', () => {syncViewWith = modelViewerComparison2;});
-
 
 // Initialize the model viewer with selected model
 $(document).ready(() => {
     const name = document.querySelector('#comparisonSelectionPanel .selectable-image.selected').getAttribute('name');
     const baseline = document.getElementById('comparisonBaselineSelection').value;
-    
-    const meshPath1 = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/ours_wo_texture_resize/${name}.glb`, meshPath2 = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/${baseline}_wo_texture_resize/${name}.glb`;
-    const texturePath = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/${name}_color.png`;
-    
+
+    const meshPath1 = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/ours_wo_texture_resize/ ${name}.glb`;
+    const meshPath2 = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/ ${baseline}_wo_texture_resize/${name}.glb`;
+    const texturePath = `https://hi3dgen-release.tos-cn-beijing.volces.com/comparison/ ${name}_color.png`;
+
     modelViewerComparison1.src = meshPath1;
     modelViewerComparison1.texturePath = texturePath;
     modelViewerComparison1.isTextured = false;
     modelViewerComparison1.resetView();
     modelViewerComparison1.showPoster();
-    
+
     modelViewerComparison2.src = meshPath2;
     modelViewerComparison2.texturePath = texturePath;
     modelViewerComparison2.isTextured = false;
     modelViewerComparison2.resetView();
-    modelViewerComparison2.showPoster(); 
+    modelViewerComparison2.showPoster();
 });
